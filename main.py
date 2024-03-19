@@ -19,7 +19,9 @@ arquivos = os.listdir(diretorio_downloads)
 arquivo_atual = None
 
 for arquivo in arquivos:
+    # Verificando se o arquivo termina com o padrão e a data atual
     if arquivo.endswith(data_atual_underscore + extensao):
+        # Pegando o nome do arquivo atual
         arquivo_atual = prefixo + data_atual_underscore + extensao
     elif arquivo.endswith(data_atual_ponto + extensao):
         arquivo_atual = prefixo + data_atual_ponto + extensao
