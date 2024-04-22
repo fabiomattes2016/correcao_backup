@@ -22,7 +22,8 @@ extensao: str = '.zip'
 
 # Obtendo a data atual e gerando padrões
 logger.info('Gerando padrões de arquivo')
-data_atual_underscore: str = datetime.now().strftime("%m_%d_%Y").lstrip('0').replace('_0', '_') # <- Remove o 0 do dia
+data_atual_underscore_sem_zero: str = datetime.now().strftime("%m_%d_%Y").lstrip('0').replace('_0', '_') # <- Remove o 0 do dia
+data_atual_underscore_com_zero: str = datetime.now().strftime("%m_%d_%Y")
 data_atual_ponto: str = datetime.now().strftime("%d.%m.%Y")
 
 # Lista dos arquivos no diretório de downloads
@@ -35,11 +36,15 @@ arquivo_atual = None
 try:
     for arquivo in arquivos:
         # Verificando se o arquivo termina com o padrão e a data atual
-        if arquivo.endswith(data_atual_underscore + extensao):
+        if arquivo == prefixo + data_atual_underscore_sem_zero + extensao:
             # Pegando o nome do arquivo atual
-            arquivo_atual = prefixo + data_atual_underscore + extensao
+            arquivo_atual = prefixo + data_atual_underscore_sem_zero + extensao
             logger.info(f"Arquivo encontrado: {arquivo}")
-        elif arquivo.endswith(data_atual_ponto + extensao):
+        elif arquivo == prefixo + data_atual_underscore_com_zero + extensao:
+            arquivo_atual = prefixo + data_atual_underscore_com_zero + extensao
+            print(arquivo_atual)
+            logger.info(f"Arquivo encontrado: {arquivo}")
+        elif arquivo == prefixo + data_atual_ponto + extensao:
             arquivo_atual = prefixo + data_atual_ponto + extensao
             logger.info(f"Arquivo encontrado: {arquivo}")
 except:
